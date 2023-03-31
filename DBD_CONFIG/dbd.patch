@@ -1,0 +1,28 @@
+diff --git a/helix-term/src/commands.rs b/helix-term/src/commands.rs
+index b55f1ab7..3b0bc157 100644
+--- a/helix-term/src/commands.rs
++++ b/helix-term/src/commands.rs
+@@ -462,6 +462,7 @@ pub fn doc(&self) -> &str {
+         dap_disable_exceptions, "Disable exception breakpoints",
+         shell_pipe, "Pipe selections through shell command",
+         shell_pipe_to, "Pipe selections into shell command ignoring output",
++        shell_pipe_to_linefeeder, "Pipe selections into line feeder",
+         shell_insert_output, "Insert shell command output before selections",
+         shell_append_output, "Append shell command output after selections",
+         shell_keep_pipe, "Filter selections with shell predicate",
+@@ -5206,6 +5207,15 @@ fn shell_prompt(cx: &mut Context, prompt: Cow<'static, str>, behavior: ShellBeha
+     );
+ }
+ 
++fn shell_pipe_to_linefeeder(cx: &mut Context) {
++    let mut cx = compositor::Context {
++        editor: cx.editor,
++        jobs: cx.jobs,
++        scroll: None,
++    };
++    shell(&mut cx, "linefeeder", &ShellBehavior::Ignore);
++}
++
+ fn suspend(_cx: &mut Context) {
+     #[cfg(not(windows))]
+     signal_hook::low_level::raise(signal_hook::consts::signal::SIGTSTP).unwrap();

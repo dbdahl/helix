@@ -1,0 +1,28 @@
+# theme = "pop-dark"
+theme = "pop-dark-dbd"
+
+[editor]
+cursorline = true
+
+[editor.soft-wrap]
+enable = true
+
+[editor.lsp]
+display-inlay-hints = true
+
+##
+## DBD Linefeeder (2022-09-08)
+##
+[keys.normal]
+# Source the current selection
+"C-space" = ["shell_pipe_to_linefeeder"]
+# Source all the lines in the current selection and move down a line
+"C-j" = ["extend_to_line_bounds", "shell_pipe_to_linefeeder", "collapse_selection", "move_line_down", "goto_line_start"]
+# Source from the beginning to the current location
+"C-l" = ["goto_line_end_newline", "select_mode", "goto_file_start", "ensure_selections_forward", "normal_mode", "shell_pipe_to_linefeeder", "collapse_selection", "goto_line_start"]
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+newline = "all"
+

@@ -21,6 +21,10 @@ display-inlay-hints = true
 # Source from the beginning to the current location
 "C-l" = ["goto_line_end_newline", "select_mode", "goto_file_start", "ensure_selections_forward", "normal_mode", "shell_pipe_to_linefeeder", "collapse_selection", "goto_line_start"]
 
+"C-F10" = ["save_selection"]
+"C-F11" = ["jump_backward"]
+"C-F12" = ["jump_forward"]
+
 [editor.whitespace.render]
 space = "none"
 tab = "all"

@@ -1542,7 +1542,7 @@ file-types = ["qmd", "Qmd"]
 roots = []
 indent = { tab-width = 2, unit = "  " }
 grammar = "markdown"
-language-server = { command = "R", args = ["--slave", "-e", "languageserver::run()"] }
+language-servers = [ "r" ]
 
 [[language]]
 name = "swift"

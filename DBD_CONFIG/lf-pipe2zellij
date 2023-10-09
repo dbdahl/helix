@@ -3,7 +3,7 @@
 import subprocess
 import fileinput
 
-subprocess.run(["zellij", "action", "move-focus", "right"])
+subprocess.run(["zellij", "action", "focus-next-pane"])
 
 for line in fileinput.input():
     args = []
@@ -12,4 +12,4 @@ for line in fileinput.input():
     args.append(str(13))
     subprocess.run(["zellij", "action", "write", *args])
 
-subprocess.run(["zellij", "action", "move-focus", "left"])
+subprocess.run(["zellij", "action", "focus-next-pane"])

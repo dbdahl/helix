@@ -70,6 +70,7 @@ over it and is merged into the default palette.
 
 | Color Name      |
 | ---             |
+| `default`       |
 | `black`         |
 | `red`           |
 | `green`         |
@@ -244,9 +245,12 @@ We use a similar set of scopes as
 
 - `diff` - version control changes
   - `plus` - additions
+    - `gutter` - gutter indicator
   - `minus` - deletions
+    - `gutter` - gutter indicator
   - `delta` - modifications
     - `moved` - renamed or moved files/changes
+    - `gutter` - gutter indicator
 
 #### Interface
 
@@ -296,7 +300,7 @@ These scopes are used for theming the editor interface:
 | `ui.window`                       | Borderlines separating splits                                                                  |
 | `ui.help`                         | Description box for commands                                                                   |
 | `ui.text`                         | Command prompts, popup text, etc.                                                              |
-| `ui.text.focus`                   |                                                                                                |
+| `ui.text.focus`                   | The currently selected line in the picker                                                      |
 | `ui.text.inactive`                | Same as `ui.text` but when the text is inactive (e.g. suggestions)                             |
 | `ui.text.info`                    | The key: command text in `ui.popup.info` boxes                                                 |
 | `ui.virtual.ruler`                | Ruler columns (see the [`editor.rulers` config][editor-section])                               |

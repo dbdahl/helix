@@ -480,7 +480,6 @@ impl MappableCommand {
         dap_disable_exceptions, "Disable exception breakpoints",
         shell_pipe, "Pipe selections through shell command",
         shell_pipe_to, "Pipe selections into shell command ignoring output",
-        shell_pipe_to_linefeeder, "Pipe selections into line feeder",
         shell_insert_output, "Insert shell command output before selections",
         shell_append_output, "Append shell command output after selections",
         shell_keep_pipe, "Filter selections with shell predicate",
@@ -5567,15 +5566,6 @@ fn shell_prompt(cx: &mut Context, prompt: Cow<'static, str>, behavior: ShellBeha
             shell(cx, input, &behavior);
         },
     );
-}
-
-fn shell_pipe_to_linefeeder(cx: &mut Context) {
-    let mut cx = compositor::Context {
-        editor: cx.editor,
-        jobs: cx.jobs,
-        scroll: None,
-    };
-    shell(&mut cx, "linefeeder", &ShellBehavior::Ignore);
 }
 
 fn suspend(_cx: &mut Context) {

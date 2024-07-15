@@ -79,19 +79,19 @@ pub fn move_vertically_visual(
         Direction::Backward => -(count as isize),
     };
 
-    // TODO how to handle inline annotations that span an entire visual line (very unlikely).
-
     // Compute visual offset relative to block start to avoid trasversing the block twice
     row_off += visual_pos.row as isize;
-    let new_pos = char_idx_at_visual_offset(
+    let (mut new_pos, virtual_rows) = char_idx_at_visual_offset(
         slice,
         block_off,
         row_off,
         new_col as usize,
         text_fmt,
         annotations,
-    )
-    .0;
+    );
+    if dir == Direction::Forward {
+        new_pos += (virtual_rows != 0) as usize;
+    }
 
     // Special-case to avoid moving to the end of the last non-empty line.
     if behaviour == Movement::Extend && slice.line(slice.char_to_line(new_pos)).len_chars() == 0 {
@@ -573,16 +573,11 @@ pub fn move_parent_node_end(
     dir: Direction,
     movement: Movement,
 ) -> Selection {
-    let tree = syntax.tree();
-
     selection.transform(|range| {
         let start_from = text.char_to_byte(range.from());
         let start_to = text.char_to_byte(range.to());
 
-        let mut node = match tree
-            .root_node()
-            .named_descendant_for_byte_range(start_from, start_to)
-        {
+        let mut node = match syntax.named_descendant_for_byte_range(start_from, start_to) {
             Some(node) => node,
             None => {
                 log::debug!(
